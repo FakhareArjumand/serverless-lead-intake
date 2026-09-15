@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless Intake Form</title>
+    <style>
+        body { background: #060E20; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .intake-container { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 12px; width: 100%; max-width: 400px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .step { display: none; }
+        .step.active { display: block; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; background: rgba(255,255,255,0.1); border: none; border-radius: 6px; color: white; box-sizing: border-box;}
+        button { background: #00C2FF; color: black; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px;}
+        .btn-secondary { background: transparent; border: 1px solid #00C2FF; color: #00C2FF; }
+        
+        /* The Honeypot Trap - Hidden from humans */
+        .trap-field { opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; }
+    </style>
+</head>
+<body>
+
+<div class="intake-container">
+    <form id="arjumandLeadForm" novalidate>
+        <!-- Spambot Trap -->
+        <input type="text" name="website_url" id="website_url" class="trap-field" tabindex="-1" autocomplete="off">
+
+        <!-- Step 1: Basic Info -->
+        <div class="step active" id="step-1">
+            <h2>Let's build something.</h2>
+            <input type="text" id="leadName" placeholder="Your Name" required>
+            <input type="email" id="leadEmail" placeholder="Your Email" required>
+            <button type="button" onclick="nextStep()">Continue</button>
+        </div>
+
+        <!-- Step 2: Project Details -->
+        <div class="step" id="step-2">
+            <h2>Project Details</h2>
+            <textarea id="leadMessage" rows="4" placeholder="Tell me about your project..." required></textarea>
+            <button type="submit" id="submitBtn">Send Request</button>
+            <button type="button" class="btn-secondary" onclick="prevStep()">Back</button>
+        </div>
+    </form>
+</div>
+
+<script src="../src/intake.js"></script>
+</body>
+</html>
